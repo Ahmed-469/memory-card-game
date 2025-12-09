@@ -1,0 +1,118 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+}
+
+h1 {
+    margin-bottom: 22px;
+}
+
+#difficulty {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+    gap: 16px;
+    padding: 8px 22px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#difficulty div{
+    padding: 9px 18px;
+    border-radius: 6px;
+    background-color: #e6e6e6;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#difficulty div:hover {
+    background-color: #c1c1c1;
+}
+
+#cards {
+    /*here i used grid to show 4 cards in each row*/
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(4, 80px);
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+#cards div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 82px;
+    height: 82px;
+    border-radius: 8px;
+    font-size: 40px;
+    background-color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+#cards div:hover {
+    background-color: #d8d6d6;
+}
+
+.card .front, .card .back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 42px;
+    border-radius: 8px;
+    position: absolute;
+    /*here I used chat gpt to know how to hide the face when the card is rotated*/
+    backface-visibility: hidden;
+}
+
+.card .front {
+    cursor: pointer;
+}
+
+#StartButton {
+    padding:9px 18px;
+    font-size: 20px;
+    border: 0;
+    border-radius: 8px;
+    background-color: #74b9ff;
+    color: white;
+    cursor: pointer;
+}
+
+#StartButton:hover {
+    background-color: #0984e3;
+}
+
+#TimerDisplay {
+    display: inline-block;
+    font-size: 24px;
+    margin-bottom: 18px;
+    padding: 5px 15px;
+    border-radius: 8px;
+}
+
+#messageDisplay {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* here I used chat gpt to know how to hide the back cards and show the front cards and I added flip class with js  */
+.card .back {
+    transform: rotateY(180deg);
+}
+
+.card.flip .front {
+    transform: rotateY(180deg);
+}
+
+.card.flip .back {
+    transform: rotateY(0deg);
+}
