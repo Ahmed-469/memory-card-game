@@ -5,6 +5,7 @@ const messageDisplayElement = document.querySelector('#messageDisplay')
 const startButtonElement = document.querySelector('#StartButton');
 
 let lockCards = true;
+let randomCards;
 
 function flipCards(card){ 
     if(lockCards) return;
@@ -21,7 +22,13 @@ function previewCards(){cardElements.forEach(function(card){
     card.classList.add('flip');
     });
     setTimeout(resetCards, 2000);
+    shuffleCards()
 }
+
+function shuffleCards(){ cardElements.forEach(function(card){
+    randomCards = Math.floor(Math.random() * 12);
+    card.style.order = randomCards;
+})}
 
 cardElements.forEach(function(card) { 
     card.addEventListener('click', function() {
