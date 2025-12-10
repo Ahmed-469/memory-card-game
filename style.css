@@ -69,7 +69,7 @@ h1 {
     font-size: 42px;
     border-radius: 8px;
     position: absolute;
-    /*here I used chat gpt to know how to hide the face when the card is rotated*/
+    /*hide the face when the card is rotated*/
     backface-visibility: hidden;
 }
 
@@ -104,7 +104,7 @@ h1 {
     font-weight: bold;
 }
 
-/* here I used chat gpt to know how to hide the back cards and show the front cards and I added flip class with js  */
+/* here I hide the back cards and show the front cards. I added flip class with js  */
 .card .back {
     transform: rotateY(180deg);
 }
