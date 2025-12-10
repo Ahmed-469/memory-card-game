@@ -13,6 +13,7 @@ function flipCard(card){
     if(lockCards) return;
     card.classList.add('flip');
     if(firstCard && secondCard) return;
+    if (card === firstCard) return;
     else if(!firstCard){
         firstCard = card; 
         return;
