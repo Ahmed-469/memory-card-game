@@ -14,26 +14,20 @@ h1 {
     margin-bottom: 22px;
 }
 
-#difficulty {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 12px;
-    gap: 16px;
-    padding: 8px 22px;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-#difficulty div{
-    padding: 9px 18px;
-    border-radius: 6px;
+#difficulty button {
+    padding: 10px 18px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
     background-color: #e6e6e6;
     cursor: pointer;
-    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 }
 
-#difficulty div:hover {
-    background-color: #c1c1c1;
+#difficulty button:hover {
+    background-color: #cbcaca;
 }
 
 #cards {
@@ -43,6 +37,7 @@ h1 {
     grid-template-columns: repeat(4, 80px);
     gap: 16px;
     margin-bottom: 18px;
+    margin-top: 18px;
 }
 
 #cards div {
@@ -77,7 +72,7 @@ h1 {
     cursor: pointer;
 }
 
-#StartButton {
+#start-button {
     padding:9px 18px;
     font-size: 20px;
     border: 0;
@@ -87,21 +82,24 @@ h1 {
     cursor: pointer;
 }
 
-#StartButton:hover {
+#start-button:hover {
     background-color: #0984e3;
 }
 
-#TimerDisplay {
+#timer-display {
     display: inline-block;
     font-size: 24px;
-    margin-bottom: 18px;
+    margin-bottom: 15px;
     padding: 5px 15px;
+    background-color: #e6ebec;
     border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 }
 
-#messageDisplay {
+#message-display {
     font-size: 24px;
     font-weight: bold;
+    margin-Bottom: 15px;
 }
 
 /* here I hide the back cards and show the front cards. I added flip class with js  */
