@@ -5,27 +5,66 @@ const hardButtonElement = document.querySelector("#hard-button");
 const timerDisplayElement = document.querySelector('#timer-display');
 const messageDisplayElement = document.querySelector('#message-display')
 const startButtonElement = document.querySelector('#start-button');
+const restartButtonElement = document.querySelector('#restart-button');
 
 let lockCards = true;
 let randomCards;
 let firstCard = null
 let secondCard = null
-let timeleft = 30;
+let timeLeft = 30;
 let timers;
 let selectedDifficulty = "easy";
 
 function startGame(){
-    if(selectedDifficulty === "easy") timeleft = 30;
-    else if(selectedDifficulty === "medium") timeleft = 20;
-    else if(selectedDifficulty === "hard") timeleft = 10;
+    startButtonElement.style.display = "none";
+    restartButtonElement.style.display = "inline-block";
+
+    setTimeByDifficulty();
     previewCards();
     randomizeCards();
 }
+
+function restartGame() { cardElements.forEach(function(card) {
+        card.classList.remove('flip');
+    });
+    clearInterval(timers);
+    lockCards = true;
+    firstCard = null;
+    secondCard = null;
+
+    timerDisplayElement.textContent = `Time left ${timeLeft}s`;
+    messageDisplayElement.textContent = "";
+
+    startGame();
+}
+
+function returnToStart() { cardElements.forEach(function(card) {
+        card.classList.remove('flip');
+    });
+    clearInterval(timers);
+    firstCard = null;
+    secondCard = null;
+    lockCards = true;
+
+    messageDisplayElement.textContent = "";
+
+    restartButtonElement.style.display = "none";
+    startButtonElement.style.display = "inline-block";
+
+    setTimeByDifficulty();
+}
+
 
 function flipCard(card){ 
     if(lockCards) return;
     card.classList.add('flip');
     checkCards(card);
+}
+
+function resetCards(){ cardElements.forEach(function(card) {
+    card.classList.remove('flip');
+    });
+    lockCards = false;
 }
 
 function checkCards(card) {
@@ -52,28 +91,14 @@ function checkCards(card) {
         firstCard = null;
         secondCard = null;
         lockCards = false;
-        } , 1000);
+        } , 600);
     }
 }
 
-function startTimer() {
-    timers = setInterval(function() {
-        if (timeleft < 0) {
-            clearInterval(timers);
-            lockCards = true;
-            messageDisplayElement.textContent = "You lose 😕";
-            return;
-        }
-
-        timerDisplayElement.textContent = `Time left ${timeleft}s`;
-        timeleft--;
-
-        if(document.querySelectorAll('.card.flip').length === cardElements.length){
-        clearInterval(timers);
-        lockCards = true;
-        messageDisplayElement.textContent = "You win 🥳";
-    }}, 1000);
-}
+function randomizeCards(){ cardElements.forEach(function(card){
+    randomCards = Math.floor(Math.random() * 12);
+    card.style.order = randomCards;
+})}
 
 function previewCards(){cardElements.forEach(function(card){
     card.classList.add('flip');
@@ -85,16 +110,33 @@ function previewCards(){cardElements.forEach(function(card){
     messageDisplayElement.textContent = "";
 }
 
-function resetCards(){ cardElements.forEach(function(card) {
-    card.classList.remove('flip');
-    });
-    lockCards = false;
+function setTimeByDifficulty() {
+    if(selectedDifficulty === "easy") timeLeft = 30;
+    else if(selectedDifficulty === "medium") timeLeft = 20;
+    else if(selectedDifficulty === "hard") timeLeft = 10;
+
+    timerDisplayElement.textContent = `Time left ${timeLeft}s`;
 }
 
-function randomizeCards(){ cardElements.forEach(function(card){
-    randomCards = Math.floor(Math.random() * 12);
-    card.style.order = randomCards;
-})}
+function startTimer() {
+    clearInterval(timers);
+    timers = setInterval(function() {
+        if (timeLeft < 0) {
+            clearInterval(timers);
+            lockCards = true;
+            messageDisplayElement.textContent = "You lose 😕";
+            return;
+        }
+
+        timerDisplayElement.textContent = `Time left ${timeLeft}s`;
+        timeLeft--;
+
+        if(document.querySelectorAll('.card.flip').length === cardElements.length){
+        clearInterval(timers);
+        lockCards = true;
+        messageDisplayElement.textContent = "You win 🥳";
+    }}, 1000);
+}
 
 cardElements.forEach(function(card) { 
     card.addEventListener('click', function() {
@@ -103,16 +145,20 @@ cardElements.forEach(function(card) {
 });
 
 startButtonElement.addEventListener('click', startGame);
+restartButtonElement.addEventListener('click', restartGame);
 
 easyButtonElement.addEventListener('click', function() {
     selectedDifficulty = "easy";
     timerDisplayElement.textContent = "Time left 30s";
+     returnToStart();
 });
 mediumButtonElement.addEventListener('click', function() {
     selectedDifficulty = "medium";
     timerDisplayElement.textContent = "Time left 20s";
+     returnToStart();
 });
 hardButtonElement.addEventListener('click', function() {
     selectedDifficulty = "hard";
     timerDisplayElement.textContent = "Time left 10s";
+     returnToStart();
 });
