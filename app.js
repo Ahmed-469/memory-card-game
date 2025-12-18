@@ -31,29 +31,8 @@ function restartGame() { cardElements.forEach(function(card) {
     lockCards = true;
     firstCard = null;
     secondCard = null;
-
-    timerDisplayElement.textContent = `Time left ${timeLeft}s`;
-    messageDisplayElement.textContent = "";
-
     startGame();
 }
-
-function returnToStart() { cardElements.forEach(function(card) {
-        card.classList.remove('flip');
-    });
-    clearInterval(timers);
-    firstCard = null;
-    secondCard = null;
-    lockCards = true;
-
-    messageDisplayElement.textContent = "";
-
-    restartButtonElement.style.display = "none";
-    startButtonElement.style.display = "inline-block";
-
-    setTimeByDifficulty();
-}
-
 
 function flipCard(card){ 
     if(lockCards) return;
@@ -118,6 +97,40 @@ function setTimeByDifficulty() {
     timerDisplayElement.textContent = `Time left ${timeLeft}s`;
 }
 
+function easyButton() {
+    selectedDifficulty = "easy";
+    timerDisplayElement.textContent = "Time left 30s";
+     returnToStart();
+}
+
+function mediumButton() {
+    selectedDifficulty = "medium";
+    timerDisplayElement.textContent = "Time left 20s";
+     returnToStart();
+}
+
+ function hardButton() {
+    selectedDifficulty = "hard";
+    timerDisplayElement.textContent = "Time left 10s";
+     returnToStart();
+}
+
+function returnToStart() { cardElements.forEach(function(card) {
+        card.classList.remove('flip');
+    });
+    clearInterval(timers);
+    firstCard = null;
+    secondCard = null;
+    lockCards = true;
+
+    messageDisplayElement.textContent = "";
+
+    restartButtonElement.style.display = "none";
+    startButtonElement.style.display = "inline-block";
+
+    setTimeByDifficulty();
+}
+
 function startTimer() {
     clearInterval(timers);
     timers = setInterval(function() {
@@ -147,18 +160,6 @@ cardElements.forEach(function(card) {
 startButtonElement.addEventListener('click', startGame);
 restartButtonElement.addEventListener('click', restartGame);
 
-easyButtonElement.addEventListener('click', function() {
-    selectedDifficulty = "easy";
-    timerDisplayElement.textContent = "Time left 30s";
-     returnToStart();
-});
-mediumButtonElement.addEventListener('click', function() {
-    selectedDifficulty = "medium";
-    timerDisplayElement.textContent = "Time left 20s";
-     returnToStart();
-});
-hardButtonElement.addEventListener('click', function() {
-    selectedDifficulty = "hard";
-    timerDisplayElement.textContent = "Time left 10s";
-     returnToStart();
-});
+easyButtonElement.addEventListener('click', easyButton)
+mediumButtonElement.addEventListener('click', mediumButton)
+hardButtonElement.addEventListener('click', hardButton)
