@@ -24,9 +24,11 @@ function startGame(){
     randomizeCards();
 }
 
-function restartGame() { cardElements.forEach(function(card) {
+function restartGame() {
+    cardElements.forEach(function(card) {
         card.classList.remove('flip');
     });
+
     clearInterval(timers);
     lockCards = true;
     firstCard = null;
@@ -40,7 +42,8 @@ function flipCard(card){
     checkCards(card);
 }
 
-function resetCards(){ cardElements.forEach(function(card) {
+function hideCards(){
+    cardElements.forEach(function(card) {
     card.classList.remove('flip');
     });
     lockCards = false;
@@ -65,7 +68,7 @@ function checkCards(card) {
         lockCards = false;
     } 
     else {
-        setTimeout(function(){
+        setTimeout(function() {
         firstCard.classList.remove('flip');
         secondCard.classList.remove('flip');
         firstCard = null;
@@ -75,18 +78,23 @@ function checkCards(card) {
     }
 }
 
-function randomizeCards(){ cardElements.forEach(function(card){
+function randomizeCards() {
+    cardElements.forEach(function(card){
     randomCards = Math.floor(Math.random() * 12);
     card.style.order = randomCards;
-})}
+    });
+}
 
-function previewCards(){cardElements.forEach(function(card){
+function previewCards(){
+    cardElements.forEach(function(card){
     card.classList.add('flip');
     });
+
     setTimeout(function() {
-        resetCards();
+        hideCards();
         startTimer();
     }, 2000);
+
     messageDisplayElement.textContent = "";
 }
 
@@ -101,24 +109,26 @@ function setTimeByDifficulty() {
 function easyButton() {
     selectedDifficulty = "easy";
     timerDisplayElement.textContent = "Time left 30s";
-     returnToStart();
+    returnToStart();
 }
 
 function mediumButton() {
     selectedDifficulty = "medium";
     timerDisplayElement.textContent = "Time left 20s";
-     returnToStart();
+    returnToStart();
 }
 
  function hardButton() {
     selectedDifficulty = "hard";
     timerDisplayElement.textContent = "Time left 10s";
-     returnToStart();
+    returnToStart();
 }
 
-function returnToStart() { cardElements.forEach(function(card) {
+function returnToStart() {
+    cardElements.forEach(function(card) {
         card.classList.remove('flip');
     });
+
     clearInterval(timers);
     firstCard = null;
     secondCard = null;
@@ -145,7 +155,7 @@ function startTimer() {
         timerDisplayElement.textContent = `Time left ${timeLeft}s`;
         timeLeft--;
 
-        if(document.querySelectorAll('.card.flip').length === cardElements.length){
+        if (document.querySelectorAll('.card.flip').length === cardElements.length) {
         clearInterval(timers);
         lockCards = true;
         messageDisplayElement.textContent = "You win 🥳";
