@@ -3,14 +3,14 @@ const easyButtonElement = document.querySelector("#easy-button");
 const mediumButtonElement = document.querySelector("#medium-button");
 const hardButtonElement = document.querySelector("#hard-button");
 const timerDisplayElement = document.querySelector('#timer-display');
-const messageDisplayElement = document.querySelector('#message-display')
+const messageDisplayElement = document.querySelector('#message-display');
 const startButtonElement = document.querySelector('#start-button');
 const restartButtonElement = document.querySelector('#restart-button');
 
 let lockCards = true;
 let randomCards;
-let firstCard = null
-let secondCard = null
+let firstCard = null;
+let secondCard = null;
 let timeLeft = 30;
 let timers;
 let selectedDifficulty = "easy";
@@ -58,6 +58,7 @@ function checkCards(card) {
 
     let firstEmoji = firstCard.querySelector('.back').textContent;
     let secondEmoji = secondCard.querySelector('.back').textContent;
+    
     if (firstEmoji === secondEmoji) {
         firstCard = null;
         secondCard = null;
@@ -160,6 +161,6 @@ cardElements.forEach(function(card) {
 startButtonElement.addEventListener('click', startGame);
 restartButtonElement.addEventListener('click', restartGame);
 
-easyButtonElement.addEventListener('click', easyButton)
-mediumButtonElement.addEventListener('click', mediumButton)
-hardButtonElement.addEventListener('click', hardButton)
+easyButtonElement.addEventListener('click', easyButton);
+mediumButtonElement.addEventListener('click', mediumButton);
+hardButtonElement.addEventListener('click', hardButton);
